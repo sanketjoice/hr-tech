@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
   FaCheckCircle,
   FaUserTie,
@@ -75,6 +76,9 @@ export default function LandingPage() {
               </li>
               <li className="hover:text-[#45BAB3] cursor-pointer">Pricing</li>
               <li className="hover:text-[#45BAB3] cursor-pointer">SEO Copy</li>
+              <li className="hover:text-[#45BAB3] cursor-pointer">
+                <Link to="/hr-tech/dashboard">Dashboard</Link>
+              </li>
             </ul>
           </div>
         </nav>
