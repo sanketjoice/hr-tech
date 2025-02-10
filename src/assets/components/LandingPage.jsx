@@ -8,8 +8,10 @@ import {
   FaRobot,
   FaUsers,
 } from "react-icons/fa";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 export default function LandingPage() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const plans = [
     {
       name: "Basic",
@@ -65,10 +67,11 @@ export default function LandingPage() {
   return (
     <div className="bg-[#1A1A2E] min-h-screen w-full flex justify-center text-white">
       <div className="max-w-[1440px] w-full">
-        {/* Navbar */}
-        <nav className="w-full fixed top-0 left-0 z-50 py-4 flex justify-center">
+        <nav className="w-full fixed top-0 left-0 z-50 py-4 flex justify-center bg-[#222]">
           <div className="max-w-[1440px] w-full flex justify-between items-center px-6">
             <h1 className="text-2xl font-bold text-[#45BAB3]">HRTech</h1>
+
+            {/* Desktop Menu */}
             <ul className="hidden md:flex gap-6 text-lg">
               <li className="hover:text-[#45BAB3] cursor-pointer">Features</li>
               <li className="hover:text-[#45BAB3] cursor-pointer">
@@ -80,6 +83,67 @@ export default function LandingPage() {
                 <Link to="/hr-tech/dashboard">Dashboard</Link>
               </li>
             </ul>
+
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden text-[#45BAB3] text-2xl"
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <FaBars />
+            </button>
+
+            {/* Mobile Menu */}
+            <div
+              className={`fixed top-0 right-0 w-64 h-full bg-[#222] text-white transform ${
+                menuOpen ? "translate-x-0" : "translate-x-full"
+              } transition-transform duration-300 ease-in-out md:hidden`}
+            >
+              <div className="p-6 flex flex-col gap-6 text-lg">
+                {/* Close Button */}
+                <button
+                  className="text-[#45BAB3] text-2xl self-end"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <FaTimes />
+                </button>
+
+                <Link
+                  to="/features"
+                  className="hover:text-[#45BAB3]"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Features
+                </Link>
+                <Link
+                  to="/testimonials"
+                  className="hover:text-[#45BAB3]"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Testimonials
+                </Link>
+                <Link
+                  to="/pricing"
+                  className="hover:text-[#45BAB3]"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Pricing
+                </Link>
+                <Link
+                  to="/seo-copy"
+                  className="hover:text-[#45BAB3]"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  SEO Copy
+                </Link>
+                <Link
+                  to="/hr-tech/dashboard"
+                  className="hover:text-[#45BAB3]"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Dashboard
+                </Link>
+              </div>
+            </div>
           </div>
         </nav>
 
