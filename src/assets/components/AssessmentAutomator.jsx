@@ -1,62 +1,118 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-export default function AssessmentAutomator({ assessmentData }) {
-  if (!assessmentData || !assessmentData.questions) {
-    return <div className="text-white">Loading assessment...</div>;
-  }
-
+const AssessmentAutomator = ({ assessment }) => {
   const [answers, setAnswers] = useState({});
+  const [score, setScore] = useState(0);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleAnswerChange = (questionId, answer) => {
-    setAnswers((prev) => ({ ...prev, [questionId]: answer }));
+  useEffect(() => {
+    console.log("Assessment loaded:", assessment);
+  }, [assessment]);
+
+  const handleAnswer = (questionId, answer) => {
+    setAnswers((prev) => ({
+      ...prev,
+      [questionId]: answer,
+    }));
   };
 
-  const handleSubmit = () => {
+  const calculateScore = () => {
+    let totalScore = 0;
+    assessment?.questions?.forEach((question) => {
+      if (answers[question.questionId] === question.correctAnswer) {
+        totalScore += question.points;
+      }
+    });
+    setScore(totalScore);
     setSubmitted(true);
   };
 
+  if (!assessment || !assessment.questions) {
+    return <p className="text-white">No assessment data available.</p>;
+  }
+
   return (
-    <div className="bg-[#222] p-6 rounded-lg shadow-lg text-white">
-      <h2 className="text-3xl font-bold mb-4">{assessmentData.title}</h2>
-      <p className="text-lg opacity-80 mb-6">{assessmentData.description}</p>
+    <div className="p-6 bg-[#1A1A2E] text-white">
+      <h2 className="text-3xl font-bold mb-4">{assessment.title}</h2>
+      <p className="text-lg opacity-80 mb-6">{assessment.description}</p>
 
-      {assessmentData.questions.map((question, index) => (
-        <div key={question.id} className="mb-4 p-4 bg-[#333] rounded-lg">
-          <h3 className="text-xl mb-2">
-            {index + 1}. {question.text}
-          </h3>
-          {question.options.map((option) => (
-            <label
-              key={option}
-              className="block p-2 bg-[#444] rounded-lg mt-2 cursor-pointer"
-            >
-              <input
-                type="radio"
-                name={question.id}
-                value={option}
-                checked={answers[question.id] === option}
-                onChange={() => handleAnswerChange(question.id, option)}
-                className="mr-2"
+      <div className="space-y-6">
+        {assessment.questions.map((question) => (
+          <div
+            key={question.questionId}
+            className="bg-[#222] p-6 rounded-lg shadow-lg"
+          >
+            <h3 className="text-xl font-semibold mb-4">
+              {question.questionText}
+            </h3>
+
+            {/* Question Type Rendering */}
+            {question.type === "image" && (
+              <img
+                src={question.imageUrl}
+                alt="Question"
+                className="mb-4 rounded-lg"
               />
-              {option}
-            </label>
-          ))}
-        </div>
-      ))}
+            )}
+            {question.type === "code" && (
+              <div>
+                <pre className="bg-[#1A1A2E] p-4 rounded-lg mb-4">
+                  <code>{question.codeSnippet}</code>
+                </pre>
+                <textarea
+                  className="w-full p-3 bg-gray-900 text-white rounded-lg"
+                  value={answers[question.questionId] || ""}
+                  onChange={(e) =>
+                    handleAnswer(question.questionId, e.target.value)
+                  }
+                  placeholder="Your code here..."
+                />
+              </div>
+            )}
+            {question.type === "multiple-choice" && (
+              <div className="space-y-2">
+                {question.options.map((option, index) => (
+                  <label
+                    key={index}
+                    className="flex items-center cursor-pointer"
+                  >
+                    <input
+                      type="radio"
+                      name={`question-${question.questionId}`}
+                      value={option}
+                      checked={answers[question.questionId] === option}
+                      onChange={() => handleAnswer(question.questionId, option)}
+                      className="mr-2"
+                    />
+                    {option}
+                  </label>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
 
-      {!submitted ? (
-        <button
-          onClick={handleSubmit}
-          className="mt-4 bg-[#45BAB3] text-white px-6 py-2 rounded-lg"
-        >
-          Submit Answers
-        </button>
-      ) : (
-        <div className="mt-4 text-green-400">
-          Your answers have been submitted!
+      <button
+        onClick={calculateScore}
+        className="mt-6 bg-[#45BAB3] text-white px-6 py-2 rounded-lg hover:bg-[#3aa8a1]"
+      >
+        Submit
+      </button>
+
+      {submitted && (
+        <div className="mt-6 bg-[#222] p-6 rounded-lg shadow-lg">
+          <h3 className="text-2xl font-semibold text-[#45BAB3]">
+            Your Score: {score}
+          </h3>
+          <p className="text-gray-300 mt-2">
+            Passing Score:{" "}
+            {assessment.evaluationCriteria?.passingScore || "N/A"}
+          </p>
         </div>
       )}
     </div>
   );
-}
+};
+
+export default AssessmentAutomator;

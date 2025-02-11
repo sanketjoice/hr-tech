@@ -12,27 +12,12 @@ import { Link } from "react-router-dom";
 import MarketAnalytics from "./MarketAnalytics";
 import CVScanner from "./CVScanner";
 import AssessmentAutomator from "./AssessmentAutomator";
+import dataScienceTest from "../tests/dataScienceTest.json";
+import frontendTest from "../tests/frontendTest.json";
 
 export default function Dashboard() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [activeSection, setActiveSection] = useState("market-analytics");
-
-  const sampleAssessment = {
-    title: "Frontend Developer Quiz",
-    description: "Test your React and JavaScript skills.",
-    questions: [
-      {
-        id: "q1",
-        text: "What is the purpose of useState in React?",
-        options: ["Manage state", "Handle routing", "Make API calls"],
-      },
-      {
-        id: "q2",
-        text: "What does JSX stand for?",
-        options: ["JavaScript XML", "JSON XML", "Java XML"],
-      },
-    ],
-  };
 
   return (
     <div className="flex h-screen bg-[#1A1A2E] text-white">
@@ -86,7 +71,9 @@ export default function Dashboard() {
         {activeSection === "market-analytics" && <MarketAnalytics />}
         {activeSection === "cv-scanner" && <CVScanner />}
         {activeSection === "assessment-automator" && (
-          <AssessmentAutomator assessmentData={sampleAssessment} />
+          <>
+            <AssessmentAutomator assessment={dataScienceTest} />
+          </>
         )}
       </div>
     </div>

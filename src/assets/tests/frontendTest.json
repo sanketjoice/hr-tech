@@ -1,0 +1,27 @@
+{
+  "assessmentId": "fe-001",
+  "title": "Frontend Development Quiz",
+  "description": "Test your knowledge of HTML, CSS, and JavaScript.",
+  "timeLimit": 30,
+  "questions": [
+    {
+      "questionId": "q1",
+      "type": "multiple-choice",
+      "questionText": "Which tag is used to create a hyperlink in HTML?",
+      "options": ["<a>", "<link>", "<href>"],
+      "correctAnswer": "<a>",
+      "points": 10
+    },
+    {
+      "questionId": "q2",
+      "type": "code",
+      "questionText": "Write a JavaScript function to toggle a CSS class on an element.",
+      "codeSnippet": "function toggleClass(element, className) {\n    // Your code here\n}",
+      "correctAnswer": "element.classList.toggle(className);",
+      "points": 20
+    }
+  ],
+  "evaluationCriteria": {
+    "passingScore": 20
+  }
+}

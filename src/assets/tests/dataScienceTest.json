@@ -1,0 +1,27 @@
+{
+  "assessmentId": "ds-001",
+  "title": "Data Science Fundamentals",
+  "description": "Test your knowledge of data science concepts.",
+  "timeLimit": 30,
+  "questions": [
+    {
+      "questionId": "q1",
+      "type": "multiple-choice",
+      "questionText": "Which library is used for data manipulation in Python?",
+      "options": ["Pandas", "NumPy", "Matplotlib"],
+      "correctAnswer": "Pandas",
+      "points": 10
+    },
+    {
+      "questionId": "q2",
+      "type": "code",
+      "questionText": "Write a Python function to calculate the mean of a list.",
+      "codeSnippet": "def calculate_mean(numbers):\n ",
+      "correctAnswer": "return sum(numbers) / len(numbers)",
+      "points": 20
+    }
+  ],
+  "evaluationCriteria": {
+    "passingScore": 20
+  }
+}
