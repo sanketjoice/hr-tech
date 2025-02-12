@@ -16,7 +16,7 @@ import dataScienceTest from "../tests/dataScienceTest.json";
 import frontendTest from "../tests/frontendTest.json";
 
 export default function Dashboard() {
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
   const [activeSection, setActiveSection] = useState("market-analytics");
 
   return (

@@ -1,4 +1,12 @@
 import React, { useState, useEffect } from "react";
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+} from "recharts";
 
 const AssessmentAutomator = ({ assessment }) => {
   const [answers, setAnswers] = useState({});
@@ -50,14 +58,27 @@ const AssessmentAutomator = ({ assessment }) => {
               {question.questionText}
             </h3>
 
-            {/* Question Type Rendering */}
+            {/* Image Question */}
             {question.type === "image" && (
-              <img
-                src={question.imageUrl}
-                alt="Question"
-                className="mb-4 rounded-lg w-full max-w-md mx-auto"
-              />
+              <div className="mb-4">
+                <img
+                  src={question.imageUrl}
+                  alt="Question"
+                  className="mb-4 rounded-lg w-full max-w-md mx-auto"
+                />
+                <input
+                  type="text"
+                  className="w-full p-3 bg-gray-900 text-white rounded-lg"
+                  placeholder="Enter your answer..."
+                  value={answers[question.questionId] || ""}
+                  onChange={(e) =>
+                    handleAnswer(question.questionId, e.target.value)
+                  }
+                />
+              </div>
             )}
+
+            {/* Code Question */}
             {question.type === "code" && (
               <div>
                 <pre className="bg-[#1A1A2E] p-4 rounded-lg mb-4 text-sm md:text-base overflow-auto">
@@ -73,6 +94,41 @@ const AssessmentAutomator = ({ assessment }) => {
                 />
               </div>
             )}
+
+            {/* Chart Question */}
+            {question.type === "chart" && question.chartData && (
+              <div className="mb-4">
+                <ResponsiveContainer width="100%" height={200}>
+                  <LineChart
+                    data={question.chartData.labels.map((label, i) => ({
+                      label,
+                      value: question.chartData.values[i],
+                    }))}
+                  >
+                    <XAxis dataKey="label" stroke="#E0E0E0" />
+                    <YAxis stroke="#E0E0E0" />
+                    <Tooltip />
+                    <Line
+                      type="monotone"
+                      dataKey="value"
+                      stroke="#45BAB3"
+                      strokeWidth={2}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+                <input
+                  type="text"
+                  className="w-full p-3 bg-gray-900 text-white rounded-lg mt-4"
+                  placeholder="Enter your analysis..."
+                  value={answers[question.questionId] || ""}
+                  onChange={(e) =>
+                    handleAnswer(question.questionId, e.target.value)
+                  }
+                />
+              </div>
+            )}
+
+            {/* Multiple Choice */}
             {question.type === "multiple-choice" && (
               <div className="space-y-2">
                 {question.options.map((option, index) => (

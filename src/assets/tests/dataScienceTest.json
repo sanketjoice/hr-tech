@@ -19,6 +19,25 @@
       "codeSnippet": "def calculate_mean(numbers):\n ",
       "correctAnswer": "return sum(numbers) / len(numbers)",
       "points": 20
+    },
+    {
+      "questionId": "q3",
+      "type": "image",
+      "questionText": "What do you observe in the given image?",
+      "imageUrl": "https://example.com/sample-image.jpg",
+      "correctAnswer": "The image depicts a scatter plot showing a positive correlation.",
+      "points": 15
+    },
+    {
+      "questionId": "q4",
+      "type": "chart",
+      "questionText": "What trend do you observe in the sales data?",
+      "chartData": {
+        "labels": ["Jan", "Feb", "Mar", "Apr", "May"],
+        "values": [200, 250, 400, 450, 600]
+      },
+      "correctAnswer": "The sales trend shows a consistent increase, indicating growth.",
+      "points": 15
     }
   ],
   "evaluationCriteria": {
