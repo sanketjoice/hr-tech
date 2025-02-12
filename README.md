@@ -1,8 +1,29 @@
-# React + Vite
+🛠️ Built With
+React: For building the user interface.
+Vite: Development environment for fast builds and development.
+Tailwind CSS: For styling and responsiveness.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+🚀 Getting Started
+Please follow the steps below to set up the project on your local machine.
+Prerequisites
+Node.js (version 14 or higher)
+npm (comes with Node.js) or yarn
+Installation
+1. Clone the Repository
+  git clone https://github.com/sanketjoice/hr-tech
+  cd hr-tech
 
-Currently, two official plugins are available:
+2. Install Dependencies
+Install all necessary packages using npm or yarn:
+  npm install
+or
+  yarn
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+4. Start the Development Server
+Run the following command to start the local development server:
+  npm run dev
+or 
+  yarn dev
+
+
+
