@@ -25,5 +25,11 @@ Run the following command to start the local development server:
 or 
   yarn dev
 
+🚀 How to Add a New Assessment
+1️⃣ Navigate to src/assets/dataScienceTest.json.
+2️⃣ Assign a unique assessmentId.
+3️⃣ Add questions with questionId & type (multiple-choice, code, image, or chart).
+4️⃣ Include correctAnswer & points for each question.
+5️⃣ Define a passing score in evaluationCriteria.
 
 
